@@ -1,0 +1,40 @@
+
+
+<form [formGroup]="changePinForm" (ngSubmit)="onChangePin()" class="p-5 border rounded bg-light">
+    <p>Change PIN for {{manager.username}}</p>
+  <div class="mb-3">
+    <label for="newPin" class="form-label">New PIN</label>
+    <input type="password" id="newPin" placeholder="New PIN" minlength="6" maxlength="6" formControlName="newPin" class="form-control">
+    @if (changePinForm.controls.newPin.invalid){
+      @if (changePinForm.controls.newPin.errors?.['minlength']){
+        <div class="text-danger mt-1">Pin must have 6 characters</div>
+      }
+      @if (changePinForm.controls.newPin.errors?.['required']){
+        <div class="text-danger mt-1">PIN is required</div>
+      }
+    }
+  </div>
+
+  <div class="mb-3">
+    <label for="sameNewPin" class="form-label">Confirm New PIN</label>
+    <input type="password" id="sameNewPin" placeholder="New PIN Again" minlength="6" maxlength="6" formControlName="sameNewPin" class="form-control">
+    @if (changePinForm.controls.sameNewPin.invalid){
+      @if (changePinForm.controls.sameNewPin.errors?.['minlength']){
+        <div class="text-danger mt-1">Pin must have 6 characters</div>
+      }
+      @if (changePinForm.controls.sameNewPin.errors?.['required']){
+        <div class="text-danger mt-1">PIN is required</div>
+      }
+    }
+  </div>
+
+  <input type="submit" class="btn btn-primary">
+
+  @if (sucessMessage()){
+    <p class="text-success mt-2">{{sucessMessage()}}</p>
+  }
+
+  @if (errorMessage()){
+    <p class="text-danger mt-2">{{errorMessage()}}</p>
+  }
+</form>

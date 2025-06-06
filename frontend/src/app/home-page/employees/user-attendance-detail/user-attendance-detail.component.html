@@ -1,0 +1,51 @@
+@let singleEmployeeAttendances = singleEmployeeSchedules$ | async;
+
+<div>
+
+ <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="all-employees">Employees</a></li>
+    <li class="breadcrumb-item"><a [href]="'all-employees/' + activatedRoute.snapshot.params['employeeId'] + '/attendances'">{{activatedRoute.snapshot.params['employeeId']}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Attendances</li>
+  </ol>
+</nav>
+
+@if (singleEmployeeAttendances?.length === 0){
+  <p>No attendances for this employee right now</p>
+
+} @else {
+   <table class="table table-bordered table-hover mt-3">
+      <thead class="table-light">
+        <tr>
+          <th>Schedule Date</th>
+            <th>Schedule Starts</th>
+            <th>Schedule Ends</th>
+          <th>Attendance Entered At</th>
+          <th>Attendance Exited At</th>
+        </tr>
+      </thead>
+      <tbody class="font-monospace">
+        @for (schedule of singleEmployeeAttendances; track $index) {
+          <tr>
+            <td class="bg-dark text-white">{{schedule.date | date:"full"}}</td>
+            <td class="bg-dark text-white">{{schedule.starts_at | date:"full"}}</td>
+            <td class="bg-dark text-white">{{schedule.ends_at | date:"full"}}</td>
+            @if (schedule?.attendance?.entered_at | date:"full") {
+              <td class="bg-dark text-white">{{schedule?.attendance?.entered_at| date:"full"}}</td>
+            } @else {
+              <td class="bg-dark text-white">Has not entered yet</td>
+            }
+           @if (schedule?.attendance?.exited_at){
+            <td class="bg-dark text-white">{{schedule?.attendance?.exited_at | date:"full"}}</td>
+           } @else {
+            <td class="bg-dark text-white">Has not exited yet</td>
+           }
+            
+          </tr>
+        }
+      </tbody>
+    </table>
+}
+    
+    
+</div>

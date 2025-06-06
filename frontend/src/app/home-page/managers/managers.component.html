@@ -1,0 +1,76 @@
+
+@let managerList = filteredManagerList$ | async;
+@let loading = loading$ | async;
+
+<button class="btn btn-primary mb-2" (click)="onAddManager()">Add Manager</button>
+
+<form [formGroup]="searchFilter">
+   <input 
+  type="text"
+  class="form-control mb-3"
+  placeholder="Search by username" 
+  formControlName="searchText"
+  />
+
+  @if (loading){
+    <p>Loading...</p>
+  } @else if (managerList){
+      <div>
+  <table class="table table-bordered table-hover mt-3">
+
+      <thead class="table-light">
+        <tr>
+          <th>Username</th>
+          <th>Joined At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody class="font-monospace">
+        @for (manager of managerList; track $index) {
+          <tr>
+            <td class="bg-dark text-white">{{manager.username}}</td>
+            <td class="bg-dark text-white">{{manager.created_at | date:"full"}}</td>
+         
+            <td class="d-flex gap-1 bg-dark text-white">
+              <button class="btn btn-sm btn-danger" (click)="onDeleteManager(manager)">Delete</button>
+              <button class="btn btn-sm btn-primary" (click)="onChangePin(manager)">Change PIN</button>
+            </td>
+          </tr>
+        } @empty {
+          <p>No managers on this page</p>
+        }
+      </tbody>
+    </table>
+      <div class="d-flex justify-content-between p-2">
+	<ngb-pagination
+  [pageSize]="searchFilter.controls.pageSize.value"
+  [collectionSize]="managerList.length"
+  [page]="searchFilter.controls.page.value"
+  (pageChange)="onPageChange($event)"
+	>
+	</ngb-pagination>
+  <select class="form-select" style="width: auto" name="pageSize" formControlName="pageSize">
+			<option value="2">2 items per page</option>
+			<option value="4">4 items per page</option>
+			<option value="6">6 items per page</option>
+		</select> 
+    
+
+    </div>
+    
+
+</div>
+
+
+  }
+
+  </form>
+
+
+
+
+
+<style>
+
+  
+</style>

@@ -1,0 +1,77 @@
+@let employeeList = filteredEmployeeList$ | async;
+
+<button class="btn btn-primary mb-4" (click)="onAddEmployee()">Add new employee</button>
+<div>
+ @if (employeeList) {  
+
+
+
+   <form [formGroup]="searchForm" class="d-flex flex-column">
+    
+  <input 
+  type="text"
+  class="form-control mb-3"
+  placeholder="Search by first name" 
+  formControlName="first_name"
+  />
+
+    <table class="table table-bordered table-hover mt-3">
+      <thead class="table-light">
+        <tr>
+          <th> Email</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Joined At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody class="font-monospace">
+        @for (employee of employeeList.employees; track $index) {
+         <tr>
+            <td class="bg-dark text-white">{{employee.email}}</td>
+            <td class="bg-dark text-white">{{employee.first_name}}</td>
+            <td class="bg-dark text-white">{{employee.last_name}}</td>
+            <td class="bg-dark text-white">{{employee.created_at | date:"full"}}</td>
+            <td class="d-flex flex-row gap-1 bg-dark">
+              <button class="btn btn-sm btn-danger" (click)="onDelete(employee)">Delete</button>
+              <button class="btn btn-sm btn-primary" (click)="onChangePin(employee)">Change PIN</button>
+              <button class="btn btn-sm btn-info" (click)="onEditEmployee(employee)">Edit</button>
+              <button class="btn btn-sm btn-link" (click)="onViewAttendances(employee.id)" >View Attendances</button>
+            </td>
+          </tr>
+        } @empty {
+          <p>No employee on this page...</p>
+        }
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between p-2">
+	<ngb-pagination
+  [pageSize]="5"
+  [collectionSize]="employeeList.totalEmployees"
+  [page]="currentPage"
+  (pageChange)="onPageChange($event)"
+	>
+	</ngb-pagination>
+  <select class="form-select" style="width: auto" name="pageSize" formControlName="items_per_page">
+			<option value="2">2 items per page</option>
+			<option value="4">4 items per page</option>
+			<option value="6">6 items per page</option>
+		</select> 
+
+    </div>
+    </form>
+  
+
+  
+  } 
+</div>
+
+
+
+
+<style>
+
+
+
+</style>

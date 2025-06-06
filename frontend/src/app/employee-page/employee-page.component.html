@@ -1,0 +1,81 @@
+
+
+@let todayScheduleInfo = todayScheduleInfo$ | async;
+
+
+
+
+  
+  @if (todayScheduleInfo){
+
+  @if (!todayScheduleInfo.attendance.entered_at && !todayScheduleInfo.attendance.exited_at){
+   @if (!addingAttendance()){
+     <button (click)="onEnterAttendance()">ON ENTER</button>
+   } @else {
+    <p>{{message()}}</p>
+   }
+   
+  } 
+
+  @if (!todayScheduleInfo.attendance.exited_at && todayScheduleInfo.attendance.entered_at){
+       @if (!addingAttendance()){
+         <button (click)="onExitAttendance()">ON EXIT</button>
+       } @else {
+        <p>{{message()}}</p>
+       }
+
+  }
+
+  @if (todayScheduleInfo.attendance.entered_at && todayScheduleInfo.attendance.exited_at){
+    <p>You made attendance for this date, Today's Date: {{todayScheduleInfo.schedule.date}}</p>
+  }
+  } @else {
+    <p>No schedule for today</p>
+  }
+
+
+<style>
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  background: white;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 1rem;
+}
+
+button {
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0c70d4;
+}
+
+
+</style>

@@ -1,0 +1,29 @@
+<div class="login-page d-flex justify-content-center align-items-center min-vh-100 bg-dark text-white">
+  <div class="card p-4 shadow" style="min-width: 300px; max-width: 400px;">
+    <div class="card-body">
+      <h4 class="card-title text-center mb-4">Enter Your PIN</h4>
+
+      <div class="mb-3">
+        <input type="password" class="form-control" [class]="{ 'is-invalid': pin.invalid, 'is-valid':pin.valid}"
+          [formControl]="pin" maxlength="6" placeholder="Enter your PIN">
+        <div class="invalid-feedback">
+         <p>Wrong PIN</p>
+         
+        </div>
+      </div>
+
+      <!-- <button 
+        class="btn btn-primary w-100" 
+        (click)="onSubmitPin()">
+        Submit
+      </button> -->
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .login-page {
+    background-color: #1c1c1c;
+  }
+</style>

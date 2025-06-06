@@ -1,0 +1,18 @@
+@let schedule = schedule$ | async;
+
+@if (schedule) {
+    <div class="card my-3">
+  <div class="card-header bg-primary text-white">
+    Schedule Details
+  </div>
+  <div class="card-body">
+    <p><strong>Date:</strong> {{ schedule?.date }}</p>
+    <p><strong>Starts At:</strong> {{ schedule?.starts_at | date: "full" }}</p>
+    <p><strong>Ends At:</strong> {{ schedule?.ends_at | date: "full" }}</p>
+    <p><strong>Employee's Name:</strong> {{ schedule?.employee_user?.first_name }}</p>
+    <p><strong>Employee's Last Name:</strong> {{ schedule?.employee_user?.last_name }}</p>
+  </div>
+  <button class="btn btn-primary" (click)="onCloseModal()">Close</button>
+</div>
+
+}

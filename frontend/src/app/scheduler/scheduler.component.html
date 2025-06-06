@@ -1,0 +1,14 @@
+<button 
+  class="btn btn-primary d-flex align-items-center gap-2 px-4 py-2 fw-semibold shadow-sm" 
+  (click)="onSendMailForWeek()" 
+  [disabled]="sendingReminderMail()"
+>
+
+@if (sendingReminderMail()){
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+}
+     {{ sendingReminderMail() ? "Sending Mails..." : "Notice Employees For This Week" }}
+
+</button>
+
+<full-calendar #calendar [options]="calendarOptions"></full-calendar>

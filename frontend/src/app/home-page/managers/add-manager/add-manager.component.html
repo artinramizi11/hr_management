@@ -1,0 +1,44 @@
+<form [formGroup]="addManagerForm" (ngSubmit)="onAddManager()" class="p-4 border rounded shadow-sm bg-light">
+
+  <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input id="username" type="text" [class]="{'is-valid': addManagerForm.controls.username.valid}" placeholder="Enter username" required formControlName="username" class="form-control" />
+    @if (addManagerForm.controls.username.errors) {
+      <div class="form-text text-danger" >Username is required</div>
+    }
+  </div>
+
+  <div class="mb-3">
+    <label for="pin" class="form-label">PIN</label>
+    <input id="pin" type="password" [class]="{'is-valid': addManagerForm.controls.pin.valid}"  placeholder="6-digit PIN" maxlength="6" required formControlName="pin" class="form-control" />
+    @if (addManagerForm.controls.pin.invalid) {
+      @if (addManagerForm.controls.pin.errors?.['required']) {
+        <div class="form-text text-danger">PIN is required</div>
+      }
+      @if (addManagerForm.controls.pin.errors?.['minlength']) {
+        <div class="form-text text-danger">PIN must be 6 characters</div>
+      }
+      @if (addManagerForm.controls.pin.errors?.['maxlength']) {
+        <div class="form-text text-danger">PIN must be at most 6 characters</div>
+      }
+    }
+  </div>  
+
+  <div class="mb-3">
+    <label class="form-label">Role</label>
+    <select class="form-select" disabled>
+      <option>Manager</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary w-100">Add New Manager</button>
+
+  @if (error()) {
+    <div class="alert alert-danger mt-3 mb-0">{{ error() }}</div>
+  }
+
+  @if (message()) {
+    <div class="alert alert-success mt-3 mb-0">{{ message() }}</div>
+  }
+
+</form>

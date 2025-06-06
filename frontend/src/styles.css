@@ -1,0 +1,41 @@
+
+
+
+
+.fc-event-main:hover {
+    background-color: blue !important;
+    cursor: pointer;
+}
+
+.fc-event-delete-box {
+  position: absolute;
+  top: 40%;
+  z-index: 4;
+  width: 80px;
+}
+
+.fc-event-view-box {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  visibility: visible;
+  width: 80px;
+}
+
+.fc-event:hover .fc-event-delete-box {
+  display: block;
+  cursor: pointer;
+}
+
+.fc-event:hover  .fc-event-view-box {
+  visibility: visible;
+}
+
+
+.nav-link.active {
+  background-color: red !important;
+}
+
+.fc-event-main-frame {
+  position: relative !important;
+}

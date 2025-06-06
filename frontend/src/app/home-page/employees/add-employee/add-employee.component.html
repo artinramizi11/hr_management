@@ -1,0 +1,47 @@
+<form [formGroup]="addEmployeeForm" (ngSubmit)="onAddEmployee()" class="p-4 border rounded shadow-sm">
+
+  <div class="mb-3">
+    <input type="text" placeholder="First Name" [class]="{'is-valid': addEmployeeForm.controls.first_name.valid}" required formControlName="first_name" class="form-control" />
+    @if (addEmployeeForm.controls.first_name.errors) {
+      <p class="text-danger mt-1">First name is required</p>
+    }
+  </div>
+
+  <div class="mb-3">
+    <input type="text" placeholder="Last Name" [class]="{'is-valid': addEmployeeForm.controls.last_name.valid}" required formControlName="last_name" class="form-control" />
+    @if (addEmployeeForm.controls.last_name.errors) {
+      <p class="text-danger mt-1">Last name is required</p>
+    }
+  </div>
+
+  <div class="mb-3">
+    <input type="email" placeholder="Email" [class]="{'is-valid': addEmployeeForm.controls.email.valid}"  required formControlName="email" class="form-control" />
+    @if (addEmployeeForm.controls.email.errors) {
+      <p class="text-danger mt-1">Email is required</p>
+    }
+  </div>
+
+  <div class="mb-3">
+    <input type="password" placeholder="PIN" [class]="{'is-valid': addEmployeeForm.controls.pin.valid}" required maxlength="6" formControlName="pin" class="form-control" />
+    @if (addEmployeeForm.controls.pin.invalid) {
+      @if (addEmployeeForm.controls.pin.errors?.['required']) {
+        <p class="text-danger mt-1">Pin is required</p>
+      }
+      @if (addEmployeeForm.controls.pin.errors?.['minlength']) {
+        <p class="text-danger mt-1">Pin must be 6 characters</p>
+      }
+      @if (addEmployeeForm.controls.pin.errors?.['maxlength']) {
+        <p class="text-danger mt-1">Pin must be at maximum 6 characters</p>
+      }
+    }
+  </div>  
+
+  <button type="submit" class="btn btn-primary">Add New Employee</button>
+  @if (error()){
+    <p class="text-danger mt-2">{{error()}}</p>
+  }
+  @if (message()){
+    <p class="text-success mt-2">{{message()}}</p>
+  }
+</form>
+

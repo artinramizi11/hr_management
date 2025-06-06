@@ -1,0 +1,28 @@
+@let generalStats = usersStats$ | async;
+
+
+@if (generalStats){
+    <div class="d-flex gap-2">
+    <div class="card p-2">
+        <h1 class="card-header">Total Users</h1>
+        <p class="text-center">{{generalStats.totalUsers}}</p>
+    </div>
+
+    <div class="card p-2">
+        <h1 class="card-header">Total Admins</h1>
+        <p class="text-center">{{generalStats.totalAdmins}}</p>
+    </div>
+
+    <div class="card p-2">
+        <h1 class="card-header">Total Managers</h1>
+        <p class="text-center">{{generalStats.totalManagers}}</p>
+    </div>
+
+    <div class="card p-2">
+        <h1 class="card-header">Total Employees</h1>
+        <p class="text-center">{{generalStats.totalEmployees}}</p>
+
+    </div>
+</div>
+}  
+
